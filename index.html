@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script type="text/javascript" src="jquery-1.11.1.js"></script>
+        <script type="text/javascript" src="raphael/raphael-min.js"></script>
+        <script type="text/javascript" src="Raphael.FreeTransform/raphael.free_transform.js"></script>
+        <div id="holder" style="height: 100%;"></div>
+        
+    </head>
+    <body>
+    <div id="container" style="width: 432px; height: 576px;"></div>
+    <script type="text/javascript">
+            $(function() {
+                var paper = Raphael(document.getElementById('container'), 432, 576);
+            
+                var item = paper.image('item.jpg', 0, 0, 432, 576);
+                var watermark = paper.image('709140474-1342493375.png', 100, 100, 148, 144);
+
+                var ft = paper.freeTransform(watermark, { 
+                        keepRatio: [ 'axisX', 'axisY', 'bboxCorners', 'bboxSides' ] 
+                }, function(ft, events) {
+                    console.log(ft.attrs);
+                });
+                
+                $('#container').hover(function() {
+                    ft.showHandles();
+                    console.log('I am in');
+                }, function() {
+                    ft.hideHandles();
+                    console.log('I am out');
+                });
+
+                //Firefox
+                $('#elem').bind('DOMMouseScroll', function(e){
+                    if(e.originalEvent.detail > 0) {
+                        //scroll down
+                        console.log('Down');
+                    }else {
+                        //scroll up
+                        console.log('Up');
+                    }
+
+                    //prevent page fom scrolling
+                    return false;
+                });
+
+                //IE, Opera, Safari
+                $('#elem').bind('mousewheel', function(e){
+                    if(e.originalEvent.wheelDelta < 0) {
+                        //scroll down
+                        console.log('Down');
+                    }else {
+                        //scroll up
+                        console.log('Up');
+                    }
+
+                    //prevent page fom scrolling
+                    return false;
+                });
+            })
+           
+
+        </script>
+    </body>
+</html>

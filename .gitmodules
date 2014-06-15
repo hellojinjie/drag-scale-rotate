@@ -1,0 +1,6 @@
+[submodule "Raphael.FreeTransform"]
+	path = Raphael.FreeTransform
+	url = https://github.com/ElbertF/Raphael.FreeTransform.git
+[submodule "raphael"]
+	path = raphael
+	url = https://github.com/DmitryBaranovskiy/raphael.git
