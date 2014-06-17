@@ -3,6 +3,7 @@
     <head>
         <title></title>
         <script type="text/javascript" src="jquery-1.11.1.js"></script>
+        <script type="text/javascript" src="jquery-mousewheel/jquery.mousewheel.js"></script>
         <script type="text/javascript" src="raphael/raphael-min.js"></script>
         <script type="text/javascript" src="Raphael.FreeTransform/raphael.free_transform.js"></script>
         <div id="holder" style="height: 100%;"></div>
@@ -25,37 +26,17 @@
                 
                 $('#container').hover(function() {
                     ft.showHandles();
-                    console.log('I am in');
                 }, function() {
                     ft.hideHandles();
-                    console.log('I am out');
                 });
 
-                //Firefox
-                $('#elem').bind('DOMMouseScroll', function(e){
-                    if(e.originalEvent.detail > 0) {
-                        //scroll down
-                        console.log('Down');
-                    }else {
-                        //scroll up
-                        console.log('Up');
+                $(watermark.node).mousewheel(function(event) {
+                    var oldOpacity = watermark.attr('opacity');
+                    if (event.deltaY > 0) {
+                        watermark.attr('opacity', oldOpacity - 0.05)
+                    } else {
+                        watermark.attr('opacity', oldOpacity + 0.05)
                     }
-
-                    //prevent page fom scrolling
-                    return false;
-                });
-
-                //IE, Opera, Safari
-                $('#elem').bind('mousewheel', function(e){
-                    if(e.originalEvent.wheelDelta < 0) {
-                        //scroll down
-                        console.log('Down');
-                    }else {
-                        //scroll up
-                        console.log('Up');
-                    }
-
-                    //prevent page fom scrolling
                     return false;
                 });
             })
